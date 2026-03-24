@@ -8,6 +8,7 @@ import ClientList from './pages/ClientList'
 import ExpenseList from './pages/ExpenseList'
 import Reports from './pages/Reports'
 import NotFound from './pages/NotFound'
+import Login from './pages/Login'
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
           <Route path="/expenses" element={<ExpenseList />} />
           <Route path="/reports" element={<Reports />} />
         </Route>
+        <Route path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
