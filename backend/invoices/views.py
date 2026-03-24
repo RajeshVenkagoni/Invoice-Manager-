@@ -29,14 +29,14 @@ class RegisterView(generics.CreateAPIView):
 class ClientViewSet(viewsets.ModelViewSet):
     queryset = Client.objects.all()
     serializer_class = ClientSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     search_fields = ['name', 'email', 'company']
     ordering = ['-created_at']
 
 
 class InvoiceViewSet(viewsets.ModelViewSet):
     queryset = Invoice.objects.select_related('client').prefetch_related('items', 'payments')
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     filterset_fields = ['status', 'client']
     search_fields = ['invoice_number', 'client__name']
     ordering = ['-created_at']
@@ -144,7 +144,7 @@ class InvoiceViewSet(viewsets.ModelViewSet):
 class ExpenseViewSet(viewsets.ModelViewSet):
     queryset = Expense.objects.all()
     serializer_class = ExpenseSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     filterset_fields = ['category', 'is_billable', 'client']
     ordering = ['-date']
 
@@ -161,7 +161,7 @@ class ExpenseViewSet(viewsets.ModelViewSet):
 
 
 class DashboardView(generics.GenericAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def get(self, request):
         today = date.today()
@@ -193,7 +193,7 @@ class DashboardView(generics.GenericAPIView):
 
 
 class ProfitLossView(generics.GenericAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def get(self, request):
         today = date.today()
